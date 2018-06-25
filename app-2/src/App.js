@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      dataArray: ["apples", "cheese", "hamburger", "pickles", "watermelon"]
+    };
+  }
+  handleChange(val) {
+    this.setState({ userInput: val });
+  }
+
   render() {
+    var dataArray = this.state.dataArray;
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="input">
+        <div>{dataArray.map((val, i, arr) => <h2>{dataArray[i]}</h2>)}</div>
       </div>
     );
   }

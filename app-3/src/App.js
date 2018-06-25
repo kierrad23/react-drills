@@ -5,22 +5,28 @@ import "./App.css";
 class App extends Component {
   constructor() {
     super();
-    this.state = { array: ["b", "bl", "bli", "blis", "bliss"] };
+    this.state = {
+      array: ["b", "bl", "bli", "blis", "bliss"],
+      empty: ""
+    };
   }
-  handleChange(val) {
-    this.setState({ userInput: val });
+  handleChange(filter) {
+    this.setState({ empty: filter });
   }
-
-  // handleArray(input){
-  //
-  // }
 
   render() {
-    var array = this.state.array;
+    let displayItems = this.state.array
+      .filter((element, index) => {
+        return element.includes(this.state.empty);
+      })
+      .map((element, index) => {
+        return <h2 key={index}>{element}</h2>;
+      });
+
     return (
       <div className="input">
-        <input onChange={e => this.handleChange(e.target.value)} />
-        <div>{array.map((val, i) => <h3>{array[i]}</h3>)}</div>
+        <input onChange={e => this.handleChange(e.target.value)} type="text" />
+        {displayItems}
       </div>
     );
   }
